@@ -18,6 +18,22 @@
       `;
       document.body.classList.add('article-reader-active');
 
+
+// Inside activateReaderMode function, after creating the article container
+const copyOptionsDiv = document.createElement('div');
+copyOptionsDiv.style.marginTop = '10px';
+
+const copyPlainButton = document.createElement('button');
+copyPlainButton.textContent = 'Copy Plain Text';
+copyOptionsDiv.appendChild(copyPlainButton);
+
+const copyFormattedButton = document.createElement('button');
+copyFormattedButton.textContent = 'Copy Formatted';
+copyOptionsDiv.appendChild(copyFormattedButton);
+
+articleContainer.appendChild(copyOptionsDiv);
+
+
       const copyButton = document.getElementById('copyArticleButton');
       if (copyButton) {
         copyButton.addEventListener('click', () => {
