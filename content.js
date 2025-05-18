@@ -1,5 +1,5 @@
 (function() {
-  // Check if reader mode is already active (to prevent re-triggering)
+  // Check if reader mode is already active
   if (document.body.classList.contains('article-reader-active')) {
     return;
   }
@@ -11,4 +11,60 @@
     if (article) {
       document.body.innerHTML = `
         <div class="article-reader-container">
-          <h1><span class="math-inline">\{article\.title \|\| 'Article'\}</h1\>
+          <h1>${article.title || 'Article'}</h1>
+          <div class="article-reader-content">${article.content || '<p>Could not extract article content.</p>'}</div>
+          <button id="copyArticleButton">Copy Article</button>
+        </div>
+      `;
+      document.body.classList.add('article-reader-active');
+
+      const copyButton = document.getElementById('copyArticleButton');
+      if (copyButton) {
+        copyButton.addEventListener('click', () => {
+          const articleText = document.querySelector('.article-reader-content').textContent;
+          navigator.clipboard.writeText(articleText)
+            .then(() => alert('Article copied to clipboard!'))
+            .catch(err => console.error('Failed to copy:', err));
+        });
+      }
+    } else {
+      console.log('Could not parse article on this page.');
+      // Optionally display a message to the user
+    }
+  }
+
+  function isLikelyArticle() {
+    const articleElement = document.querySelector('article');
+    const headingCount = document.querySelectorAll('h1, h2, h3').length;
+    const paragraphCount = document.querySelectorAll('p').length;
+    const liCount = document.querySelectorAll('li').length;
+    const textLength = document.body.textContent.length;
+
+    // More sophisticated checks
+    const hasMainContent = textLength > 800;
+    const hasSufficientHeadings = headingCount >= 1;
+    const hasSufficientParagraphsOrLists = paragraphCount >= 5 || liCount >= 15;
+
+    return (articleElement !== null && hasMainContent) || (hasSufficientHeadings && hasSufficientParagraphsOrLists && hasMainContent);
+  }
+
+  // Trigger reader mode automatically on page load if it looks like an article
+  if (document.readyState === 'complete') {
+    if (isLikelyArticle()) {
+      activateReaderMode();
+    }
+  } else {
+    window.addEventListener('load', () => {
+      if (isLikelyArticle()) {
+        activateReaderMode();
+      }
+    });
+  }
+
+  // Listen for messages from the background script (e.g., toolbar icon click)
+  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === "toggleReaderMode") {
+      activateReaderMode();
+    }
+  });
+})();
