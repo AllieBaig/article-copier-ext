@@ -34,6 +34,31 @@ copyOptionsDiv.appendChild(copyFormattedButton);
 articleContainer.appendChild(copyOptionsDiv);
 
 
+
+
+// Inside activateReaderMode function, after creating the buttons
+copyPlainButton.addEventListener('click', () => {
+  const articleText = document.querySelector('.article-reader-content').textContent;
+  navigator.clipboard.writeText(articleText)
+    .then(() => alert('Article text (plain) copied to clipboard!'))
+    .catch(err => console.error('Failed to copy:', err));
+});
+
+copyFormattedButton.addEventListener('click', () => {
+  const articleContent = document.querySelector('.article-reader-content').innerHTML;
+  // Basic formatting - you might need a more robust solution
+  const formattedText = articleContent.replace(/<h\d>/g, '\n# ').replace(/<\/h\d>/g, '\n\n')
+                                     .replace(/<strong>/g, '**').replace(/<\/strong>/g, '**')
+                                     .replace(/<em>/g, '*').replace(/<\/em>/g, '*')
+                                     .replace(/<li>/g, '- ').replace(/<\/li>/g, '\n')
+                                     .replace(/<p>/g, '\n').replace(/<\/p>/g, '\n\n')
+                                     .replace(/<br>/g, '\n');
+  navigator.clipboard.writeText(formattedText)
+    .then(() => alert('Article text (formatted) copied to clipboard!'))
+    .catch(err => console.error('Failed to copy formatted text:', err));
+});
+
+
       const copyButton = document.getElementById('copyArticleButton');
       if (copyButton) {
         copyButton.addEventListener('click', () => {
