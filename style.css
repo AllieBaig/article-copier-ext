@@ -1,0 +1,93 @@
+.article-reader-container {
+  font-family: sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f8f8;
+  padding: 20px;
+  max-width: 800px;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.article-reader-container h1 {
+  font-size: 2.5em;
+  color: #222;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.article-reader-container h2 {
+  font-size: 1.8em;
+  color: #444;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.article-reader-container h3 {
+  font-size: 1.4em;
+  color: #555;
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+.article-reader-container p {
+  margin-bottom: 15px;
+}
+
+.article-reader-container ul, .article-reader-container ol {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.article-reader-container li {
+  margin-bottom: 8px;
+}
+
+.article-reader-container blockquote {
+  border-left: 5px solid #ccc;
+  padding-left: 15px;
+  margin-left: 0;
+  font-style: italic;
+  color: #777;
+}
+
+.article-reader-container pre {
+  background-color: #eee;
+  padding: 10px;
+  overflow-x: auto;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+.article-reader-container code {
+  font-family: monospace;
+  background-color: #eee;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+.article-reader-container img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 15px auto;
+}
+
+.article-reader-container button#copyArticleButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 20px;
+}
+
+.article-reader-container button#copyArticleButton:hover {
+  background-color: #0056b3;
+}
+
+/* Add more styles as needed to customize the appearance */
